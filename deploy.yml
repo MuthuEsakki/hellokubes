@@ -1,0 +1,24 @@
+# Simple deployment used to deploy and manage the app in nigelpoulton/getting-started-k8s:1.0
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-kube-web-deploy
+  labels:
+    app: hello-kube-web
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: hello-kube-web
+  template:
+    metadata:
+      labels:
+        app: hello-kube-web
+    spec: 
+      terminationGracePeriodSeconds: 1
+      containers:
+      - name: hello-cube-test
+        image: registry.hub.docker.com/esakkimuthua12/test:mytest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
